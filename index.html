@@ -273,7 +273,7 @@
     .intro {
       font-size: clamp(1.125rem, 2vw, 1.375rem);
       line-height: 1.9;
-      color: var(--color-text-light);
+      color: rgba(249, 250, 251, 0.8);
       text-align: left;
       max-width: 900px;
       margin-bottom: 6rem;
@@ -301,14 +301,14 @@
       font-size: 1.5rem;
       font-weight: 400;
       margin-bottom: 1.5rem;
-      color: var(--color-primary);
+      color: #f9fafb;
       letter-spacing: -0.02em;
     }
 
     .card-text {
       font-size: 1rem;
       line-height: 1.8;
-      color: var(--color-text-light);
+      color: rgba(249, 250, 251, 0.78);
       font-weight: 300;
     }
 
@@ -325,7 +325,7 @@
 
     .services-subheading {
       font-size: clamp(1.125rem, 2vw, 1.375rem);
-      color: var(--color-text-light);
+      color: rgba(249, 250, 251, 0.78);
       font-weight: 300;
       margin-top: 1rem;
     }
@@ -354,8 +354,8 @@
     .service-number {
       font-size: 5rem;
       font-weight: 300;
-      color: var(--color-primary);
-      opacity: 0.15;
+      color: rgba(249, 250, 251, 0.65);
+      opacity: 1;
       line-height: 1;
       flex-shrink: 0;
       min-width: 100px;
@@ -370,21 +370,21 @@
       font-size: clamp(1.75rem, 3vw, 2.25rem);
       font-weight: 300;
       margin-bottom: 1.5rem;
-      color: var(--color-primary);
+      color: #f9fafb;
       letter-spacing: -0.02em;
     }
 
     .service-description {
       font-size: 1.125rem;
       line-height: 1.9;
-      color: var(--color-text-light);
+      color: rgba(249, 250, 251, 0.78);
       font-weight: 300;
     }
 
     /* Portfolio */
     .portfolio {
       padding: var(--spacing-xl) 0;
-      background: radial-gradient(circle at bottom, #020617 0, #000000 65%);
+      background: radial-gradient(circle at bottom, #020617 0, #020617 45%, #020617 100%);
     }
 
     .portfolio-header {
@@ -411,42 +411,85 @@
       font-size: 0.875rem;
       font-weight: 400;
       margin-bottom: 3rem;
-      color: var(--color-primary);
+      color: #e5e7eb;
       text-transform: uppercase;
       letter-spacing: 0.15em;
     }
 
     .portfolio-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      gap: 2rem;
+      grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+      gap: 1.5rem;
     }
 
     .portfolio-card {
-      padding: 0;
-      background: transparent;
-      transition: opacity 0.3s ease;
-      border: none;
+      position: relative;
+      display: block;
+      aspect-ratio: 1 / 1;
+      border-radius: 1.25rem;
+      overflow: hidden;
       cursor: pointer;
+      text-decoration: none;
+      background: transparent;
+      perspective: 1200px;
     }
 
-    .portfolio-card:hover {
-      opacity: 0.6;
+    .portfolio-card .card-inner {
+      position: absolute;
+      inset: 0;
+      transition: transform 0.6s ease;
+      transform-style: preserve-3d;
+    }
+
+    .card-face {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backface-visibility: hidden;
+    }
+
+    .card-front {
+      background: radial-gradient(circle at top, #f9fafb 0, #e5e7eb 55%, #e5e7eb 100%);
+      color: #020617;
+      padding: 1.75rem;
+      box-shadow: 0 18px 45px rgba(15, 23, 42, 0.35);
+      transform: rotateY(0deg);
+    }
+
+    .card-front-inner {
+      text-align: center;
+    }
+
+    .card-back {
+      transform: rotateY(180deg);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-color: #020617;
+    }
+
+    .portfolio-card:hover .card-inner {
+      transform: rotateY(180deg);
     }
 
     .portfolio-card.exited {
-      opacity: 0.5;
       cursor: default;
     }
 
-    .portfolio-card.exited:hover {
-      opacity: 0.4;
+    .portfolio-card.exited:hover .card-inner {
+      transform: rotateY(180deg);
     }
 
-    .card-content {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
+    .card-front .company-name {
+      margin-bottom: 0.4rem;
+      color: #020617;
+    }
+
+    .card-front .category {
+      opacity: 0.9;
+      color: #4b5563;
     }
 
     .company-name {
@@ -815,63 +858,113 @@
         <h3 class="section-title">Portfolio Companies</h3>
         <div class="portfolio-grid">
           <a href="https://www.aifi.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">Aifi</h4>
-              <p class="category">Smart Retail</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Aifi</h4>
+                  <p class="category">Smart Retail</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_bb3c0d9a8f96424cac55774526a15660~mv2.png/v1/fill/w_48,h_24,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_bb3c0d9a8f96424cac55774526a15660~mv2.png');"></div>
             </div>
           </a>
           <a href="https://www.aitreat.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">AiTreat</h4>
-              <p class="category">Med Robot</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">AiTreat</h4>
+                  <p class="category">Med Robot</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_ca73189ad3e04972a99abddb2b14dad8~mv2.jpg/v1/fill/w_118,h_155,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_ca73189ad3e04972a99abddb2b14dad8~mv2.jpg');"></div>
             </div>
           </a>
           <a href="https://www.anchain.ai/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">AnChain</h4>
-              <p class="category">BlockChain Tech</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">AnChain</h4>
+                  <p class="category">BlockChain Tech</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_70ea1ec7776c4f11bbd4a50a4c955c60~mv2.png/v1/fill/w_123,h_87,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_70ea1ec7776c4f11bbd4a50a4c955c60~mv2.png');"></div>
             </div>
           </a>
           <a href="https://www.bitorobotics.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">Bito (宾通智能)</h4>
-              <p class="category">Smart Manufacturing</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Bito</h4>
+                  <p class="category">Smart Manufacturing</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_b7bc4ba0c68e411494abf390ec01c377~mv2_d_4032_3024_s_4_2.jpg/v1/fill/w_147,h_110,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_b7bc4ba0c68e411494abf390ec01c377~mv2_d_4032_3024_s_4_2.jpg');"></div>
             </div>
           </a>
           <a href="https://www.exyn.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">Exyn</h4>
-              <p class="category">Autonomous Aerial</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Exyn</h4>
+                  <p class="category">Autonomous Aerial</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_51a78f09a96a4dfeb9213ddef70eb58f~mv2_d_2880_1800_s_2.png/v1/fill/w_49,h_31,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_51a78f09a96a4dfeb9213ddef70eb58f~mv2_d_2880_1800_s_2.png');"></div>
             </div>
           </a>
           <a href="https://www.lumiidisplay.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">Fathom Optics (Lumii)</h4>
-              <p class="category">3D Display Tech</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Fathom Optics (Lumii)</h4>
+                  <p class="category">3D Display Tech</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_b234232013f8495aaf746bc04dfe1b9b~mv2.jpeg/v1/fill/w_75,h_42,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_b234232013f8495aaf746bc04dfe1b9b~mv2.jpeg');"></div>
             </div>
           </a>
           <a href="https://kinderlabrobotics.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">Kinderlab Robotics</h4>
-              <p class="category">STEM Ed Robot</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Kinderlab Robotics</h4>
+                  <p class="category">STEM Ed Robot</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_478bee2b946a4a40a7ebcbeebe470a2f~mv2.jpg/v1/fill/w_95,h_54,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_478bee2b946a4a40a7ebcbeebe470a2f~mv2.jpg');"></div>
             </div>
           </a>
           <a href="https://www.memverge.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">MemVerge</h4>
-              <p class="category">Big Memory</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">MemVerge</h4>
+                  <p class="category">Big Memory</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_085ae9d38b634c9790e3d044756f4d98~mv2.jpg/v1/fill/w_126,h_104,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_085ae9d38b634c9790e3d044756f4d98~mv2.jpg');"></div>
             </div>
           </a>
           <a href="https://www.neuralgalaxy.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">NeuralGalaxy (优脑银河)</h4>
-              <p class="category">NLP/Neural Science</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">NeuralGalaxy</h4>
+                  <p class="category">NLP/Neural Science</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_79475256f97144b3b372e874d8e79651~mv2.png/v1/fill/w_200,h_200,al_c,q_85,blur_3,enc_avif,quality_auto/a4f598_79475256f97144b3b372e874d8e79651~mv2.png');"></div>
             </div>
           </a>
           <a href="https://www.tvisioninsights.com/" target="_blank" rel="noopener noreferrer" class="portfolio-card">
-            <div class="card-content">
-              <h4 class="company-name">TVision Insight</h4>
-              <p class="category">Ad Tech</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">TVision Insight</h4>
+                  <p class="category">Ad Tech</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_5ac414147f9745a9b0e269b7bcbc3530~mv2.png/v1/fill/w_81,h_32,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_5ac414147f9745a9b0e269b7bcbc3530~mv2.png');"></div>
             </div>
           </a>
         </div>
@@ -881,51 +974,86 @@
         <h3 class="section-title">Exits & Acquisitions</h3>
         <div class="portfolio-grid">
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">Ghost Robotics</h4>
-              <p class="category">Acquired by LIG Nex1</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Ghost Robotics</h4>
+                  <p class="category">Acquired by LIG Nex1</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_743a70407fd846018d2ac642eae2e455~mv2.jpeg/v1/fill/w_65,h_49,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_743a70407fd846018d2ac642eae2e455~mv2.jpeg');"></div>
             </div>
           </div>
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">Turing Video (图灵视频)</h4>
-              <p class="category">Patrolling Robot</p>
-              <p class="note">Exited</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Turing Video (图灵视频)</h4>
+                  <p class="category">Patrolling Robot</p>
+                  <p class="note">Exited</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_f055dc598bc149d4848a7fb18a31262d~mv2.png/v1/fill/w_70,h_78,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_f055dc598bc149d4848a7fb18a31262d~mv2.png');"></div>
             </div>
           </div>
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">Conjur</h4>
-              <p class="category">DevOps</p>
-              <p class="note">Acquired by CyberArk</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Conjur</h4>
+                  <p class="category">DevOps</p>
+                  <p class="note">Acquired by CyberArk</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_72a6514910ce40ada979517afdd5950a~mv2.jpg/v1/fill/w_147,h_83,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_72a6514910ce40ada979517afdd5950a~mv2.jpg');"></div>
             </div>
           </div>
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">Giaran</h4>
-              <p class="category">Beauty Tech</p>
-              <p class="note">Acquired by Shiseido</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Giaran</h4>
+                  <p class="category">Beauty Tech</p>
+                  <p class="note">Acquired by Shiseido</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_f3596bde363f49679497ad3d488d375b~mv2.png/v1/fill/w_49,h_28,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_f3596bde363f49679497ad3d488d375b~mv2.png');"></div>
             </div>
           </div>
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">American Robotics</h4>
-              <p class="category">Ag Drone Tech</p>
-              <p class="note">Listed on Nasdaq (ONDS)</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">American Robotics</h4>
+                  <p class="category">Ag Drone Tech</p>
+                  <p class="note">Listed on Nasdaq (ONDS)</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_f6841bb77fc04728ac41096f598a7e6c~mv2.jpg/v1/fill/w_147,h_98,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_f6841bb77fc04728ac41096f598a7e6c~mv2.jpg');"></div>
             </div>
           </div>
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">Empirical</h4>
-              <p class="category">Big Data</p>
-              <p class="note">Acquired by Tableau</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Empirical</h4>
+                  <p class="category">Big Data</p>
+                  <p class="note">Acquired by Tableau</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_4b345b0317b54cb291729d6a12eb2410~mv2_d_2254_1266_s_2.png/v1/fill/w_49,h_28,al_c,q_85,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_4b345b0317b54cb291729d6a12eb2410~mv2_d_2254_1266_s_2.png');"></div>
             </div>
           </div>
           <div class="portfolio-card exited">
-            <div class="card-content">
-              <h4 class="company-name">Butterfleye</h4>
-              <p class="category">Smart Camera</p>
-              <p class="note">Acquired by Ooma</p>
+            <div class="card-inner">
+              <div class="card-face card-front">
+                <div class="card-front-inner">
+                  <h4 class="company-name">Butterfleye</h4>
+                  <p class="category">Smart Camera</p>
+                  <p class="note">Acquired by Ooma</p>
+                </div>
+              </div>
+              <div class="card-face card-back" style="background-image:url('https://static.wixstatic.com/media/a4f598_925a3e8d84fb4c809cc91f9cb5043251~mv2.jpg/v1/fill/w_91,h_51,al_c,q_80,usm_0.66_1.00_0.01,blur_2,enc_avif,quality_auto/a4f598_925a3e8d84fb4c809cc91f9cb5043251~mv2.jpg');"></div>
             </div>
           </div>
         </div>
