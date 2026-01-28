@@ -12,13 +12,15 @@
     }
 
     :root {
-      --color-primary: #000000;
-      --color-secondary: #666666;
-      --color-accent: #000000;
-      --color-bg: #ffffff;
-      --color-bg-alt: #fafafa;
-      --color-text: #1a1a1a;
-      --color-text-light: #666666;
+      --color-primary: #020617;
+      --color-secondary: #4b5563;
+      --color-accent: #020617;
+      --color-bg: #0b1120;
+      --color-bg-alt: #020617;
+      --color-surface: #020617;
+      --color-surface-alt: #111827;
+      --color-text: #e5e7eb;
+      --color-text-light: #9ca3af;
       --max-width: 1400px;
       --spacing-xs: 0.5rem;
       --spacing-sm: 1rem;
@@ -37,7 +39,7 @@
     body {
       font-family: var(--font-sans);
       color: var(--color-text);
-      background-color: var(--color-bg);
+      background: radial-gradient(circle at top left, #1e293b 0, #020617 45%, #000000 100%);
       line-height: 1.7;
       font-size: 16px;
       -webkit-font-smoothing: antialiased;
@@ -62,14 +64,15 @@
       left: 0;
       right: 0;
       z-index: 1000;
-      background: rgba(255, 255, 255, 0.98);
-      transition: all 0.3s ease;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+      background: transparent;
+      transition: all 0.35s ease;
+      border-bottom: 1px solid transparent;
     }
 
     .nav.scrolled {
-      background: rgba(255, 255, 255, 0.98);
-      border-bottom-color: rgba(0, 0, 0, 0.08);
+      background: rgba(15, 23, 42, 0.96);
+      border-bottom-color: rgba(148, 163, 184, 0.3);
+      backdrop-filter: blur(18px);
     }
 
     .nav-container {
@@ -84,8 +87,8 @@
     .logo {
       font-size: 1.25rem;
       font-weight: 400;
-      letter-spacing: 0.05em;
-      color: var(--color-primary);
+      letter-spacing: 0.18em;
+      color: #f9fafb;
       text-transform: uppercase;
     }
 
@@ -96,16 +99,16 @@
     }
 
     .nav-links a {
-      font-size: 0.875rem;
+      font-size: 0.75rem;
       font-weight: 400;
-      color: var(--color-text);
+      color: #e5e7eb;
       transition: opacity 0.2s ease;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.18em;
       text-transform: uppercase;
     }
 
     .nav-links a:hover {
-      opacity: 0.6;
+      opacity: 0.5;
     }
 
     /* Hero */
@@ -115,7 +118,6 @@
       align-items: center;
       justify-content: center;
       padding: 12rem 0 8rem;
-      background: var(--color-bg);
       position: relative;
       background-image: url('assets/A_photograph_captures_a_catamaran_sailing_towards_.jpg');
       background-size: cover;
@@ -130,7 +132,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(0, 0, 0, 0.3);
+      background:
+        linear-gradient(to bottom, rgba(15, 23, 42, 0.25) 0%, rgba(15, 23, 42, 0.08) 40%, transparent 85%),
+        radial-gradient(circle at 15% 10%, rgba(255, 255, 255, 0.25) 0, transparent 55%);
       z-index: 0;
     }
 
@@ -153,7 +157,7 @@
       font-weight: 300;
       line-height: 1.05;
       letter-spacing: -0.04em;
-      color: #ffffff;
+      color: #f9fafb;
       margin-bottom: 3rem;
       text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     }
@@ -161,7 +165,7 @@
     .hero-subtitle {
       font-size: clamp(1.125rem, 2.5vw, 1.5rem);
       line-height: 1.8;
-      color: rgba(255, 255, 255, 0.95);
+      color: rgba(241, 245, 249, 0.95);
       margin-bottom: 4rem;
       font-weight: 300;
       max-width: 700px;
@@ -176,20 +180,20 @@
     .button {
       display: inline-block;
       padding: 1.25rem 3rem;
-      background: #ffffff;
-      color: var(--color-primary);
+      background: #f9fafb;
+      color: #020617;
       font-size: 0.875rem;
       font-weight: 400;
       border-radius: 0;
       transition: all 0.3s ease;
-      border: 1px solid #ffffff;
+      border: 1px solid #f9fafb;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .button:hover {
       background: transparent;
-      color: #ffffff;
+      color: #f9fafb;
       opacity: 1;
       border-color: #ffffff;
     }
@@ -197,7 +201,7 @@
     /* About */
     .about {
       padding: var(--spacing-xl) 0;
-      background: var(--color-bg);
+      background: radial-gradient(circle at top, rgba(15, 23, 42, 0.9) 0, rgba(15, 23, 42, 0.98) 45%, #020617 100%);
     }
 
     .container {
@@ -218,7 +222,7 @@
       letter-spacing: -0.03em;
       text-align: left;
       margin-bottom: 3rem;
-      color: var(--color-primary);
+      color: #f9fafb;
     }
 
     .intro {
@@ -266,7 +270,7 @@
     /* Services */
     .services {
       padding: var(--spacing-xl) 0;
-      background: var(--color-bg-alt);
+      background: linear-gradient(180deg, #020617 0%, #020617 35%, #020617 100%);
     }
 
     .services-header {
@@ -335,7 +339,7 @@
     /* Portfolio */
     .portfolio {
       padding: var(--spacing-xl) 0;
-      background: var(--color-bg);
+      background: radial-gradient(circle at bottom, #020617 0, #000000 65%);
     }
 
     .portfolio-header {
@@ -426,7 +430,7 @@
     /* Contact */
     .contact {
       padding: var(--spacing-xl) 0 6rem;
-      background: var(--color-bg-alt);
+      background: #020617;
     }
 
     .contact-content {
