@@ -117,6 +117,21 @@
       padding: 12rem 0 8rem;
       background: var(--color-bg);
       position: relative;
+      background-image: url('assets/A_photograph_captures_a_catamaran_sailing_towards_.jpg');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.3);
+      z-index: 0;
     }
 
     .hero-container {
@@ -138,17 +153,19 @@
       font-weight: 300;
       line-height: 1.05;
       letter-spacing: -0.04em;
-      color: var(--color-primary);
+      color: #ffffff;
       margin-bottom: 3rem;
+      text-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
     }
 
     .hero-subtitle {
       font-size: clamp(1.125rem, 2.5vw, 1.5rem);
       line-height: 1.8;
-      color: var(--color-text-light);
+      color: rgba(255, 255, 255, 0.95);
       margin-bottom: 4rem;
       font-weight: 300;
       max-width: 700px;
+      text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
     }
 
     .hero-cta {
@@ -159,21 +176,22 @@
     .button {
       display: inline-block;
       padding: 1.25rem 3rem;
-      background: var(--color-primary);
-      color: white;
+      background: #ffffff;
+      color: var(--color-primary);
       font-size: 0.875rem;
       font-weight: 400;
       border-radius: 0;
       transition: all 0.3s ease;
-      border: 1px solid var(--color-primary);
+      border: 1px solid #ffffff;
       letter-spacing: 0.1em;
       text-transform: uppercase;
     }
 
     .button:hover {
       background: transparent;
-      color: var(--color-primary);
+      color: #ffffff;
       opacity: 1;
+      border-color: #ffffff;
     }
 
     /* About */
@@ -491,6 +509,7 @@
       .hero {
         padding: 8rem 0 4rem;
         min-height: 90vh;
+        background-attachment: scroll;
       }
 
       .hero-container {
