@@ -248,6 +248,17 @@
       text-shadow: 0 1px 10px rgba(0, 0, 0, 0.2);
     }
 
+    .hero-cta .button {
+      background: transparent;
+      color: #f9fafb;
+      border-color: #f9fafb;
+    }
+    .hero-cta .button:hover {
+      background: #f9fafb;
+      color: #020617;
+      border-color: #f9fafb;
+    }
+
     .hero-cta {
       display: flex;
       gap: 1rem;
@@ -692,6 +703,14 @@
 
     .contact-info .contact-modal-open {
       margin-top: 1rem;
+      background: transparent;
+      color: #f9fafb;
+      border-color: #f9fafb;
+    }
+    .contact-info .contact-modal-open:hover {
+      background: #f9fafb;
+      color: #020617;
+      border-color: #f9fafb;
     }
 
     .footer {
@@ -1376,7 +1395,7 @@
             <p class="info-value">
               <a href="mailto:contact@airx.com">contact@airx.com</a>
             </p>
-            <button type="button" class="button contact-modal-open" id="contact-modal-open">Get in Touch</button>
+            <button type="button" class="button contact-modal-open" id="contact-modal-open">Drop Us a Message</button>
           </div>
           
           <div class="info-item">
@@ -1401,7 +1420,7 @@
   <div class="contact-modal-overlay" id="contact-modal-overlay" aria-hidden="true">
     <div class="contact-modal" role="dialog" aria-labelledby="contact-modal-title">
       <button type="button" class="contact-modal-close" id="contact-modal-close" aria-label="Close">&times;</button>
-      <h3 id="contact-modal-title">Get in Touch</h3>
+      <h3 id="contact-modal-title">Drop Us a Message</h3>
       <form id="contact-form">
         <div class="form-group">
           <label for="contact-name">Name</label>
