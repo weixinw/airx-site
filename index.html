@@ -1100,6 +1100,15 @@
   </section>
 
   <script>
+    // Always start at top on load/refresh (disable browser scroll restoration)
+    if ('scrollRestoration' in history) {
+      history.scrollRestoration = 'manual';
+    }
+    window.addEventListener('load', function() {
+      window.scrollTo(0, 0);
+    });
+    window.scrollTo(0, 0);
+
     // Navigation scroll effect
     const nav = document.getElementById('nav');
 
