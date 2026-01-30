@@ -641,10 +641,14 @@
       text-align: left;
     }
 
+    .contact-content .heading {
+      color: #f9fafb;
+    }
+
     .contact-subheading {
       font-size: clamp(1.125rem, 2vw, 1.375rem);
       line-height: 1.9;
-      color: var(--color-text-light);
+      color: #f9fafb;
       margin-bottom: 6rem;
       font-weight: 300;
     }
@@ -665,25 +669,29 @@
       font-weight: 400;
       text-transform: uppercase;
       letter-spacing: 0.15em;
-      color: var(--color-text-light);
+      color: #f9fafb;
       margin-bottom: 1rem;
     }
 
     .info-value {
       font-size: 1.25rem;
-      color: var(--color-primary);
+      color: #f9fafb;
       line-height: 1.8;
       font-weight: 300;
       letter-spacing: -0.01em;
     }
 
     .info-value a {
-      color: var(--color-primary);
+      color: #f9fafb;
       transition: opacity 0.2s ease;
     }
 
     .info-value a:hover {
       opacity: 0.6;
+    }
+
+    .contact-info .contact-modal-open {
+      margin-top: 1rem;
     }
 
     .footer {
@@ -697,6 +705,123 @@
       font-weight: 300;
       letter-spacing: 0.05em;
     }
+
+    /* Contact modal */
+    .contact-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .contact-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .contact-modal {
+      background: var(--color-bg);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      padding: 2rem;
+      max-width: 420px;
+      width: calc(100% - 2rem);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+    }
+    .contact-modal h3 {
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: #f9fafb;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .contact-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      background: transparent;
+      color: #f9fafb;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      opacity: 0.7;
+    }
+    .contact-modal-close:hover {
+      opacity: 1;
+    }
+    .contact-modal .form-group {
+      margin-bottom: 1.25rem;
+    }
+    .contact-modal label {
+      display: block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #9ca3af;
+      margin-bottom: 0.5rem;
+    }
+    .contact-modal input,
+    .contact-modal textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      font-size: 1rem;
+      font-family: inherit;
+      color: #f9fafb;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(148, 163, 184, 0.4);
+      border-radius: 6px;
+      box-sizing: border-box;
+    }
+    .contact-modal input::placeholder,
+    .contact-modal textarea::placeholder {
+      color: #6b7280;
+    }
+    .contact-modal textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .contact-modal .form-submit {
+      margin-top: 1.5rem;
+      width: 100%;
+      padding: 1rem 2rem;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #020617;
+      background: #f9fafb;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: opacity 0.2s ease;
+    }
+    .contact-modal .form-submit:hover {
+      opacity: 0.9;
+    }
+    .contact-modal .form-submit:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .contact-modal .form-message {
+      font-size: 0.875rem;
+      margin-top: 1rem;
+      min-height: 1.25rem;
+    }
+    .contact-modal .form-message.success { color: #86efac; }
+    .contact-modal .form-message.error { color: #f87171; }
+    .contact-modal { position: relative; }
 
     /* Responsive */
     @media (max-width: 768px) {
@@ -1241,7 +1366,7 @@
       <div class="contact-content">
         <h2 class="heading">Let's build together</h2>
         <p class="contact-subheading">
-          If you're a scientist or tech entrepreneur building something meaningful, 
+          If you're a tech entrepreneur or scientist building something meaningful, 
           we'd love to hear from you.
         </p>
         
@@ -1251,13 +1376,14 @@
             <p class="info-value">
               <a href="mailto:contact@airx.com">contact@airx.com</a>
             </p>
+            <button type="button" class="button contact-modal-open" id="contact-modal-open">Get in Touch</button>
           </div>
           
           <div class="info-item">
             <h3 class="info-label">Location</h3>
             <p class="info-value">
-              12F 245 Main St<br>
-              Cambridge, MA 02142
+              Silicon Valley<br>
+              Boston
             </p>
           </div>
         </div>
@@ -1271,6 +1397,35 @@
     </div>
   </section>
 
+  <!-- Contact form modal -->
+  <div class="contact-modal-overlay" id="contact-modal-overlay" aria-hidden="true">
+    <div class="contact-modal" role="dialog" aria-labelledby="contact-modal-title">
+      <button type="button" class="contact-modal-close" id="contact-modal-close" aria-label="Close">&times;</button>
+      <h3 id="contact-modal-title">Get in Touch</h3>
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="contact-name">Name</label>
+          <input type="text" id="contact-name" name="from_name" required placeholder="Your name">
+        </div>
+        <div class="form-group">
+          <label for="contact-email">Email</label>
+          <input type="email" id="contact-email" name="from_email" required placeholder="your@email.com">
+        </div>
+        <div class="form-group">
+          <label for="contact-phone">Phone</label>
+          <input type="tel" id="contact-phone" name="phone" placeholder="Your phone">
+        </div>
+        <div class="form-group">
+          <label for="contact-message">Message</label>
+          <textarea id="contact-message" name="message" required placeholder="Your message"></textarea>
+        </div>
+        <p class="form-message" id="contact-form-message" role="status"></p>
+        <button type="submit" class="form-submit" id="contact-form-submit">Send Message</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
   <script>
     // Always start at top on load/refresh (disable browser scroll restoration)
     if ('scrollRestoration' in history) {
@@ -1333,6 +1488,82 @@
         });
       });
     }
+
+    // Contact modal and EmailJS form
+    (function() {
+      var overlay = document.getElementById('contact-modal-overlay');
+      var openBtn = document.getElementById('contact-modal-open');
+      var closeBtn = document.getElementById('contact-modal-close');
+      var form = document.getElementById('contact-form');
+      var formMessage = document.getElementById('contact-form-message');
+      var formSubmit = document.getElementById('contact-form-submit');
+
+      function showMessage(text, type) {
+        formMessage.textContent = text;
+        formMessage.className = 'form-message ' + (type || '');
+      }
+
+      function openModal() {
+        if (overlay) {
+          overlay.classList.add('open');
+          overlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closeModal() {
+        if (overlay) {
+          overlay.classList.remove('open');
+          overlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+        showMessage('');
+      }
+
+      if (openBtn) openBtn.addEventListener('click', openModal);
+      if (closeBtn) closeBtn.addEventListener('click', closeModal);
+      if (overlay) {
+        overlay.addEventListener('click', function(e) {
+          if (e.target === overlay) closeModal();
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && overlay && overlay.classList.contains('open')) closeModal();
+      });
+
+      if (typeof emailjs !== 'undefined') {
+        emailjs.init('F4cspNdrkj65wJ7cM');
+      }
+
+      if (form) {
+        form.addEventListener('submit', function(e) {
+          e.preventDefault();
+          if (typeof emailjs === 'undefined') {
+            showMessage('Email service not loaded. Add your EmailJS Public Key.', 'error');
+            return;
+          }
+          var serviceID = 'service_iqrmv4s';
+          var templateID = 'template_vr0qcoj';
+          if (serviceID === 'YOUR_SERVICE_ID' || templateID === 'YOUR_TEMPLATE_ID') {
+            showMessage('Please configure EmailJS: Public Key, Service ID, and Template ID in the script.', 'error');
+            return;
+          }
+          formSubmit.disabled = true;
+          showMessage('Sending…', '');
+          emailjs.sendForm(serviceID, templateID, form).then(
+            function() {
+              showMessage('Message sent. We\'ll get back to you soon!', 'success');
+              form.reset();
+              formSubmit.disabled = false;
+            },
+            function(err) {
+              showMessage('Failed to send: ' + (err.text || err.message || 'Please try again.'), 'error');
+              formSubmit.disabled = false;
+            }
+          );
+        });
+      }
+    })();
 
     // Portfolio cards: first click flips for 3s; second click within 3s = flip back + go to URL if any
     document.querySelectorAll('.portfolio-card').forEach(function(card) {
