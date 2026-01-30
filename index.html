@@ -514,16 +514,13 @@
       background-color: #020617;
     }
 
-    .portfolio-card:hover .card-inner {
+    /* Flip on click (class .flipped), not on hover */
+    .portfolio-card.flipped .card-inner {
       transform: rotateY(180deg);
     }
 
     .portfolio-card.exited {
-      cursor: default;
-    }
-
-    .portfolio-card.exited:hover .card-inner {
-      transform: rotateY(180deg);
+      cursor: pointer;
     }
 
     .portfolio-card.exited.defunct .card-back::after {
@@ -537,11 +534,7 @@
       pointer-events: none;
     }
 
-    .portfolio-card.exited.defunct:hover .card-back::after {
-      opacity: 1;
-    }
-
-    .portfolio-card:hover {
+    .portfolio-card.exited.defunct.flipped .card-back::after {
       opacity: 1;
     }
 
@@ -1340,6 +1333,32 @@
         });
       });
     }
+
+    // Portfolio cards: first click flips for 3s; second click within 3s = flip back + go to URL if any
+    document.querySelectorAll('.portfolio-card').forEach(function(card) {
+      card.addEventListener('click', function(e) {
+        if (card.classList.contains('flipped')) {
+          e.preventDefault();
+          if (card._flipTimeout) {
+            clearTimeout(card._flipTimeout);
+            card._flipTimeout = null;
+          }
+          card.classList.remove('flipped');
+          var href = card.getAttribute('href');
+          if (card.tagName === 'A' && href && href !== '#' && href.indexOf('http') === 0) {
+            window.open(href, '_blank', 'noopener,noreferrer');
+          }
+        } else {
+          e.preventDefault();
+          if (card._flipTimeout) clearTimeout(card._flipTimeout);
+          card.classList.add('flipped');
+          card._flipTimeout = setTimeout(function() {
+            card.classList.remove('flipped');
+            card._flipTimeout = null;
+          }, 3000);
+        }
+      });
+    });
   </script>
 </body>
 </html>
