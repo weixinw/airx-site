@@ -119,7 +119,8 @@
       align-items: center;
     }
 
-    .nav-links a {
+    .nav-links a,
+    .nav-links .nav-link-btn {
       font-size: 0.75rem;
       font-weight: 400;
       color: #e5e7eb;
@@ -128,7 +129,16 @@
       text-transform: uppercase;
     }
 
-    .nav-links a:hover {
+    .nav-links .nav-link-btn {
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .nav-links a:hover,
+    .nav-links .nav-link-btn:hover {
       opacity: 0.5;
     }
 
@@ -842,6 +852,120 @@
     .contact-modal .form-message.error { color: #f87171; }
     .contact-modal { position: relative; }
 
+    /* Partner modal */
+    .partner-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.25s ease;
+    }
+    .partner-modal-overlay.open {
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .partner-modal {
+      background: var(--color-bg);
+      border: 1px solid rgba(148, 163, 184, 0.3);
+      border-radius: 8px;
+      padding: 0;
+      max-width: 800px;
+      width: calc(100% - 2rem);
+      max-height: 90vh;
+      overflow-y: auto;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+    .partner-modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      border-bottom: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    .partner-modal-title {
+      font-size: 1.25rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      color: #f9fafb;
+      text-transform: uppercase;
+    }
+    .partner-modal-close {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      width: 2rem;
+      height: 2rem;
+      border: none;
+      background: transparent;
+      color: #f9fafb;
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      padding: 0;
+      opacity: 0.7;
+    }
+    .partner-modal-close:hover {
+      opacity: 1;
+    }
+    .partner-modal-content {
+      padding: 2rem;
+    }
+    .partner-modal .partner-card {
+      padding: 2rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid rgba(148, 163, 184, 0.2);
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+    }
+    .partner-modal .partner-card:last-child {
+      margin-bottom: 0;
+    }
+    .partner-card-name-row {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.25rem;
+    }
+    .partner-card-name {
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #f9fafb;
+    }
+    .partner-linkedin-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: #d4af37;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .partner-linkedin-badge:hover {
+      opacity: 0.9;
+      transform: scale(1.05);
+    }
+    .partner-linkedin-badge svg {
+      width: 1.25rem;
+      height: 1.25rem;
+      fill: currentColor;
+    }
+    .partner-card-title {
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .partner-card-intro {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+    }
+
     /* Responsive */
     @media (max-width: 768px) {
       .nav-container {
@@ -1014,6 +1138,7 @@
         <a href="#home">Home</a>
         <a href="#about">Services</a>
         <a href="#portfolio">Portfolio</a>
+        <button type="button" class="nav-link-btn" id="partner-nav-open">Partners</button>
         <a href="#contact">Contact</a>
       </div>
     </div>
@@ -1416,6 +1541,38 @@
     </div>
   </section>
 
+  <!-- Partner modal -->
+  <div class="partner-modal-overlay" id="partner-modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="partner-modal-title">
+    <div class="partner-modal" onclick="event.stopPropagation()">
+      <button type="button" class="partner-modal-close" id="partner-modal-close" aria-label="Close">&times;</button>
+      <div class="partner-modal-header">
+        <h3 id="partner-modal-title" class="partner-modal-title">Partners</h3>
+      </div>
+      <div class="partner-modal-content">
+        <div class="partner-card">
+          <div class="partner-card-name-row">
+            <span class="partner-card-name">Pei Qi</span>
+            <a href="https://www.linkedin.com/in/qipei/" target="_blank" rel="noopener noreferrer" class="partner-linkedin-badge" aria-label="Pei Qi on LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+          <div class="partner-card-title">General Partner</div>
+          <p class="partner-card-intro">Founder and General Partner, AIRX. Managing Partner, Brain Robotics Capital Inno Fund. Board member across multiple AI, robotics and medical companies, including AiTreat Pte. Ltd., KinderLab Robotics, BITO Robotics. PMP-certified operator with deep program execution background (project management, product development, business process). Former Co-President, Founding Members, Advisory Board roles in MIT-China Innovation and Entrepreneurship Forum. Former committee of MIT Sloan CIO Symposium. Former Directors of Harvard China Forum. MBA in Technology Entrepreneurship and MS in Computer Engineering from University of Wisconsin–Madison.</p>
+        </div>
+        <div class="partner-card">
+          <div class="partner-card-name-row">
+            <span class="partner-card-name">Weixin Wu</span>
+            <a href="https://www.linkedin.com/in/weixin-wu-29331919/" target="_blank" rel="noopener noreferrer" class="partner-linkedin-badge" aria-label="Weixin Wu on LinkedIn">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+          </div>
+          <div class="partner-card-title">General Partner</div>
+          <p class="partner-card-intro">General Partner of AIRX. Formerly with AMD, Qualcomm, Amazon. His technology expertise spans from edge compute to cloud compute, from GPU micro architecture, runtime, computer vision engine, to deep neural network training, hyper-scaling, computer vision SaaS and LLM SaaS. Domain coverages in semiconductor, SaaS, security and consumer electronics. Formerly Founding Member of Amazon ReKognition (through M&A of Orbeus), held Chief Scientist role of public listed company, held leadership role of multiple AI and robotics companies and advisory role of ByHealth Ltd. and Tencent Ltd. BS in EE from Harbin Institute of Technology, MS in EE from Clemson University. Besides academics, he is a world ranked tennis player (ITF M35 #75, 2025) and Partner of Mission Hills Racquet and Swim Club and TopTennis Management in Irvine, CA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Contact form modal -->
   <div class="contact-modal-overlay" id="contact-modal-overlay" aria-hidden="true">
     <div class="contact-modal" role="dialog" aria-labelledby="contact-modal-title">
@@ -1482,7 +1639,7 @@
     // Mobile nav toggle
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
-    const navLinkItems = document.querySelectorAll('.nav-links a');
+    const navLinkItems = document.querySelectorAll('.nav-links a, .nav-links .nav-link-btn');
     const logo = document.getElementById('logo');
 
     if (navToggle && navLinks) {
@@ -1496,6 +1653,40 @@
         });
       });
     }
+
+    // Partner modal
+    (function() {
+      var partnerOverlay = document.getElementById('partner-modal-overlay');
+      var partnerOpenBtn = document.getElementById('partner-nav-open');
+      var partnerCloseBtn = document.getElementById('partner-modal-close');
+
+      function openPartnerModal() {
+        if (partnerOverlay) {
+          partnerOverlay.classList.add('open');
+          partnerOverlay.setAttribute('aria-hidden', 'false');
+          document.body.style.overflow = 'hidden';
+        }
+      }
+
+      function closePartnerModal() {
+        if (partnerOverlay) {
+          partnerOverlay.classList.remove('open');
+          partnerOverlay.setAttribute('aria-hidden', 'true');
+          document.body.style.overflow = '';
+        }
+      }
+
+      if (partnerOpenBtn) partnerOpenBtn.addEventListener('click', openPartnerModal);
+      if (partnerCloseBtn) partnerCloseBtn.addEventListener('click', closePartnerModal);
+      if (partnerOverlay) {
+        partnerOverlay.addEventListener('click', function(e) {
+          if (e.target === partnerOverlay) closePartnerModal();
+        });
+      }
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && partnerOverlay && partnerOverlay.classList.contains('open')) closePartnerModal();
+      });
+    })();
 
     if (logo) {
       logo.addEventListener('click', function (event) {

@@ -2,9 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import styles from './Navigation.module.css'
+import Partner from './Partner'
 
 export default function Navigation() {
   const [scrolled, setScrolled] = useState(false)
+  const [partnerOpen, setPartnerOpen] = useState(false)
 
   useEffect(() => {
     const handleScroll = () => {
@@ -15,16 +17,26 @@ export default function Navigation() {
   }, [])
 
   return (
-    <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-      <div className={styles.container}>
-        <div className={styles.logo}>AIRX</div>
-        <div className={styles.links}>
-          <a href="#about">About</a>
-          <a href="#services">Services</a>
-          <a href="#portfolio">Portfolio</a>
-          <a href="#contact">Contact</a>
+    <>
+      <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
+        <div className={styles.container}>
+          <div className={styles.logo}>AIRX</div>
+          <div className={styles.links}>
+            <a href="#about">About</a>
+            <a href="#services">Services</a>
+            <a href="#portfolio">Portfolio</a>
+            <button
+              type="button"
+              className={styles.linkButton}
+              onClick={() => setPartnerOpen(true)}
+            >
+              Partners
+            </button>
+            <a href="#contact">Contact</a>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+      <Partner isOpen={partnerOpen} onClose={() => setPartnerOpen(false)} />
+    </>
   )
 }
