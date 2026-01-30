@@ -69,14 +69,24 @@
       right: 0;
       z-index: 1000;
       background: transparent;
-      transition: all 0.35s ease;
+      transition: border-color 0.35s ease;
       border-bottom: 1px solid transparent;
     }
 
-    .nav.scrolled {
+    /* Use pseudo-element for scrolled background so fixed nav-links overlay isn't clipped.
+       backdrop-filter on an ancestor would create a new containing block and break
+       position:fixed for the mobile dropdown when page is scrolled. */
+    .nav.scrolled::before {
+      content: '';
+      position: absolute;
+      inset: 0;
       background: rgba(15, 23, 42, 0.96);
-      border-bottom-color: rgba(148, 163, 184, 0.3);
       backdrop-filter: blur(18px);
+      z-index: -1;
+    }
+
+    .nav.scrolled {
+      border-bottom-color: rgba(148, 163, 184, 0.3);
     }
 
     .nav-container {
@@ -1244,10 +1254,20 @@
     if ('scrollRestoration' in history) {
       history.scrollRestoration = 'manual';
     }
-    window.addEventListener('load', function() {
+    function scrollToTop() {
       window.scrollTo(0, 0);
+    }
+    scrollToTop();
+    window.addEventListener('load', function() {
+      scrollToTop();
+      requestAnimationFrame(scrollToTop);
     });
-    window.scrollTo(0, 0);
+    window.addEventListener('pageshow', function(event) {
+      scrollToTop();
+      if (event.persisted) {
+        requestAnimationFrame(scrollToTop);
+      }
+    });
 
     // Navigation scroll effect
     const nav = document.getElementById('nav');
