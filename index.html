@@ -1130,11 +1130,21 @@
 
       .portfolio-card .card-front .category,
       .portfolio-card .card-front .note {
-        font-size: clamp(0.7rem, 2.5vw, 1rem);
+        font-size: clamp(0.65rem, 2.5vw, 1rem);
       }
 
       .portfolio-card .card-front {
-        padding: 1rem;
+        padding: 0.75rem;
+      }
+
+      .portfolio-card .card-front-inner {
+        gap: 0.2rem;
+      }
+
+      .portfolio-card .card-front .company-name,
+      .portfolio-card .card-front .category,
+      .portfolio-card .card-front .note {
+        flex-shrink: 1;
       }
 
       .contact {
@@ -1148,6 +1158,30 @@
       .contact-info {
         flex-direction: column;
         gap: 3rem;
+      }
+    }
+
+    /* Extra small screens */
+    @media (max-width: 400px) {
+      .portfolio-card .company-name {
+        font-size: 0.75rem;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+      }
+
+      .portfolio-card .card-front .category,
+      .portfolio-card .card-front .note {
+        font-size: 0.6rem;
+        -webkit-line-clamp: 1;
+        line-clamp: 1;
+      }
+
+      .portfolio-card .card-front {
+        padding: 0.5rem;
+      }
+
+      .portfolio-card .card-front-inner {
+        gap: 0.15rem;
       }
     }
   </style>
