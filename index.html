@@ -486,6 +486,10 @@
       perspective: 1200px;
     }
 
+    a.portfolio-card:hover {
+      opacity: 1;
+    }
+
     .portfolio-card .card-inner {
       position: absolute;
       inset: 0;
@@ -532,6 +536,11 @@
       background-size: cover;
       background-position: center;
       background-repeat: no-repeat;
+      background-color: transparent;
+    }
+
+    /* Only exited cards get a dark fallback background */
+    .portfolio-card.exited .card-back {
       background-color: #020617;
     }
 
